@@ -12,19 +12,27 @@ let myCollection = [];
   //NOTE: Your object's properties must have title, artist, and yearPublished in order for this assignment's automated tests to work correctly!
   //Add the new object to the end of the collection array.
   //return the newly created object.
-function addtoCollection(collection, title, artist, yearPublished) {
+function addToCollection(collection, title, artist, yearPublished) {
   const obj = {};
   obj.title = title;
   obj.artist = artist;
-  obj.yearPubished = yearPublished;
+  obj.yearPublished = yearPublished;
   collection.push(obj);
   return obj;
 }
 
+//Use and Test the addToCollection function:
+  //Add 6 albums to the myCollection array. Aim to have a mix of both same and different artists and published years. (Feel free to share your musical interests, or make stuff up. Totally fine either way.)
+  //console.log each album as added using the function's returned value.
+  //After all are added, console.log the myCollection array.
+  console.log('Added Shania Twain: ', addToCollection(myCollection, 'Come on Over', 'Shania Twain', 1997));
+  console.log('Added Backstreet Boys: ', addToCollection(myCollection, 'Millennium', 'Backstreet Boys', 1999));
+  console.log('Added Britney Spears: ', addToCollection(myCollection, 'Oops!... I Did It Again', 'Britney Spears', 2000));
+  console.log('Added A Teens: ', addToCollection(myCollection, 'Teen Spirit', 'A*Teens', 2001));
+  console.log('Added Avril Lavigne: ', addToCollection(myCollection, 'Let Go', 'Avril Lavigne', 2002));
+  console.log('Added Shrek: ', addToCollection(myCollection, 'Shrek Soundtrack', 'Shrek', 2001));
 
-
-
-
+  console.log('My whole collection: ', myCollection);
 
 
 
