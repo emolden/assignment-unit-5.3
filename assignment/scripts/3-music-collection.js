@@ -42,8 +42,13 @@ function addToCollection(collection, title, artist, yearPublished) {
   //TITLE by ARTIST, published in YEARPUBLISHED.
 
 function showCollection(collection) {
-  
+  for (i=0; i<collection.length; i++) {
+    let albumAsAString = 'Album: ' + myCollection[i].title + ' By: ' + myCollection[i].artist + ' Made in: ' + myCollection[i].yearPublished;
+    console.log(albumAsAString);
+  }
 }
+
+showCollection(myCollection);
 
 //Test the showCollection function.
 
