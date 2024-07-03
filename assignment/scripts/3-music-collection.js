@@ -28,9 +28,9 @@ function addToCollection(collection, title, artist, yearPublished) {
   //console.log each album as added using the function's returned value.
   //After all are added, console.log the myCollection array.
   console.log('Added Shania Twain: ', addToCollection(myCollection, 'Come on Over', 'Shania Twain', 1997));
-  console.log('Added Backstreet Boys: ', addToCollection(myCollection, 'Millennium', 'Backstreet Boys', 1999));
+  console.log('Added Backstreet Boys: ', addToCollection(myCollection, 'Millennium', 'New Name', 1999));
   console.log('Added Britney Spears: ', addToCollection(myCollection, 'Oops!... I Did It Again', 'Britney Spears', 2000));
-  console.log('Added A Teens: ', addToCollection(myCollection, 'Teen Spirit', 'A*Teens', 2001));
+  console.log('Added A Teens: ', addToCollection(myCollection, 'Teen Spirit', 'New Name', 2001));
   console.log('Added Avril Lavigne: ', addToCollection(myCollection, 'Let Go', 'Avril Lavigne', 2002));
   console.log('Added Shrek: ', addToCollection(myCollection, 'Shrek Soundtrack', 'Shrek', 2001));
 
@@ -42,15 +42,17 @@ function addToCollection(collection, title, artist, yearPublished) {
   //TITLE by ARTIST, published in YEARPUBLISHED.
 
 function showCollection(collection) {
+  //console.log('In showCollcetion. The current parameter is: ' + collection);
   for (i=0; i<collection.length; i++) {
-    let albumAsAString = 'Album: ' + myCollection[i].title + ' By: ' + myCollection[i].artist + ' Made in: ' + myCollection[i].yearPublished;
+    let albumAsAString = 'Album: ' + collection[i].title + ' By: ' + collection[i].artist + ' Made in: ' + collection[i].yearPublished;
     console.log(albumAsAString);
-  }
-}
-
-showCollection(myCollection);
+  } //end looping through collection array adding objects as strings
+} // end showCollection
 
 //Test the showCollection function.
+showCollection(myCollection);
+
+
 
 //Add a function named findByArtist. This function should:
   //Take in a collection parameter. Remember, we want to be able to search any collection!
@@ -59,8 +61,25 @@ showCollection(myCollection);
   //Loop through the collection and add any album objects with a matching artist to the array.
   //Return the array with the matching results. (If no results are found, an empty array should be returned.)
 
+function findByArtist (collection, artist) {
+  let matchingArtist = [];
+  for(i=0; i<collection.length; i++) {
+    if (collection[i].artist === artist) {
+      matchingArtist.push(collection[i]);
+    }
+  }
+  return matchingArtist;
+}
+
   //Test the findByArtist function. Make sure to test with an artist you know is in the collection, as well as an artist 
   //you know is not in your collection. Check that for artists with multiple matches, all are returned.
+console.log('Testing findByArtist:');
+console.log(findByArtist(myCollection, 'New Name'));
+console.log(findByArtist(myCollection, 'Old Name'));
+console.log(findByArtist(myCollection, 'Shrek'));
+
+
+
 
 
 
@@ -75,6 +94,63 @@ showCollection(myCollection);
     //If no results are found, return an empty array.
     //If there is no search object, an empty search object, or missing artist/yearPublished data provided as input, 
     //return all albums from the collection being searched.
+
+function search (collection, searchCriteria) {
+  let newCollection = [];
+  if (isEmpty(searchCriteria) || typeof searchCriteria != 'object' || missingInfo(searchCriteria)) {
+    return collection;
+  }
+  else {
+    for(i=0; i<collection.length; i++) {
+      if (collection[i].artist === searchCriteria.artist && collection[i].yearPublished === searchCriteria.yearPublished) {
+        newCollection.push(collection[i]);
+      }
+    }    
+    return newCollection;
+  }
+}
+
+function isEmpty (array) {
+  return array && Object.keys(array).length === 0;
+}
+
+function missingInfo (object) {
+  if (object.artist === undefined || object.yearPublished === undefined || object.artist === '' || object.yearPublished === '') {
+    return true;
+  }
+  return false;
+}
+
+console.log('Tests for search function:')
+//return empty array
+let searchObject1 = {
+  artist: 'Ray Charles',
+  yearPublished: 1957
+};
+console.log (search(myCollection, searchObject1));
+//return one match in array
+let searchObject2 = {
+  artist: 'Shrek',
+  yearPublished: 2001
+};
+console.log(search(myCollection, searchObject2));
+//no search object, so return original array
+let searchObject3;
+
+console.log(search(myCollection, searchObject3));
+
+//empty search object, so return original array
+let searchObject4 = {
+
+};
+console.log(search(myCollection, searchObject4));
+
+//missing data, so return original array
+let searchObject5 = {
+  yearPublished: 2001
+};
+console.log(searchObject5.artis);
+console.log(search(myCollection, searchObject5));
 
 
 // EXTRA STRETCHY STRETCH
