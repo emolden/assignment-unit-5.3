@@ -13,26 +13,70 @@ let myCollection = [];
   //to work correctly!
   //Add the new object to the end of the collection array.
   //return the newly created object.
-function addToCollection(collection, title, artist, yearPublished) {
+function addToCollection(collection, title, artist, yearPublished, tracks) {
+  console.log('in addToCollection function');
   const obj = {};
   obj.title = title;
   obj.artist = artist;
   obj.yearPublished = yearPublished;
+  obj.tracks = tracks;
   collection.push(obj);
-  return obj;
+  return collection;
 }
+
+function addToTracks(tracks, songName, songDuration) {
+  for (i = 0; i<songName.length; i++) {
+    const obj = {};
+    obj.name = songName[i];
+    obj.duration = songDuration[i];
+    console.log(obj);
+    tracks.push(obj);
+  }
+  return  console.log(tracks);
+}
+
+let shaniaTracks = [];
+let shaniaNames = ['Man! I feel like a woman', 'im holdin on to love', 'love gets me every time', 'dont be studpid', 'from this moment on']
+let shaniaDurations = ['3:53', '3:30', '3:33', '3:35', '4:43']
+console.log(addToTracks(shaniaTracks, shaniaNames, shaniaDurations));
+
+let backstreetTracks = [];
+let backstreetNames = ['larger than life', 'i want it that way', 'show me the meaning of being lonely', 'its gotta be you']
+let backstreetDurations = ['3:30', '3:33', '3:35', '4:43']
+console.log(addToTracks(backstreetTracks, backstreetNames, backstreetDurations));
+
+let britneyTracks = [];
+let britneyNames = ['oops!.. i did it again', 'stronger', 'dont go knockin on my door']
+let britneyDurations = ['3:33', '3:35', '4:43']
+console.log(addToTracks(britneyTracks, britneyNames, britneyDurations));
+
+let ateensTracks = [];
+let ateensNames = ['upside down', 'to the music', 'halfway around the world', 'firefly']
+let ateensDurations = ['3:54', '3:31', '3:34', '3:36']
+console.log(addToTracks(ateensTracks, ateensNames, ateensDurations));
+
+let avrilTracks = [];
+let avrilNames = ['losing grip', 'sk8er boi', 'complicated', 'im with you', 'mobile']
+let avrilDurations = ['3:29', '3:32', '3:34', '4:42', '3:41']
+console.log(addToTracks(avrilTracks, avrilNames, avrilDurations));
+
+let shrekTracks = [];
+let shrekNames = ['stay home', 'im a believer', 'like wow', 'it is you']
+let shrekDurations = ['3:53', '3:30', '3:33', '3:35']
+console.log(addToTracks(shrekTracks, shrekNames, shrekDurations));
 
 //Use and Test the addToCollection function:
   //Add 6 albums to the myCollection array. Aim to have a mix of both same and different artists and published 
   //years. (Feel free to share your musical interests, or make stuff up. Totally fine either way.)
   //console.log each album as added using the function's returned value.
   //After all are added, console.log the myCollection array.
-  console.log('Added Shania Twain: ', addToCollection(myCollection, 'Come on Over', 'Shania Twain', 1997));
-  console.log('Added Backstreet Boys: ', addToCollection(myCollection, 'Millennium', 'New Name', 1999));
-  console.log('Added Britney Spears: ', addToCollection(myCollection, 'Oops!... I Did It Again', 'Britney Spears', 2000));
-  console.log('Added A Teens: ', addToCollection(myCollection, 'Teen Spirit', 'New Name', 2001));
-  console.log('Added Avril Lavigne: ', addToCollection(myCollection, 'Let Go', 'Avril Lavigne', 2002));
-  console.log('Added Shrek: ', addToCollection(myCollection, 'Shrek Soundtrack', 'Shrek', 2001));
+
+  /*console.log('Added Shania Twain: ', */addToCollection(myCollection, 'Come on Over', 'Shania Twain', 1997, shaniaTracks);
+  /*console.log('Added Backstreet Boys: ', */addToCollection(myCollection, 'Millennium', 'New Name', 1999, backstreetTracks);
+  /*console.log('Added Britney Spears: ', */addToCollection(myCollection, 'Oops!... I Did It Again', 'Britney Spears', 2000, britneyTracks);
+  /*console.log('Added A Teens: ', */addToCollection(myCollection, 'Teen Spirit', 'New Name', 2001, ateensTracks);
+  /*console.log('Added Avril Lavigne: ', */addToCollection(myCollection, 'Let Go', 'Avril Lavigne', 2002, avrilTracks);
+  /*console.log('Added Shrek: ', */addToCollection(myCollection, 'Shrek Soundtrack', 'Shrek', 2001, shrekTracks);
 
   console.log('My whole collection: ', myCollection);
 
@@ -41,16 +85,19 @@ function addToCollection(collection, title, artist, yearPublished) {
   //Loop through the collection and console.log each album's information formatted within a single string, like: 
   //TITLE by ARTIST, published in YEARPUBLISHED.
 
+console.log('Starting showCollection');
 function showCollection(collection) {
-  //console.log('In showCollcetion. The current parameter is: ' + collection);
-  for (i=0; i<collection.length; i++) {
-    let albumAsAString = 'Album: ' + collection[i].title + ' By: ' + collection[i].artist + ' Made in: ' + collection[i].yearPublished;
-    console.log(albumAsAString);
+  console.log('In showCollcetion. The current parameter is: ', collection);
+  //let albumAsString = '';
+  for (let i=0; i<collection.length; i++) {
+    console.log( 'Album: ' + collection[i].title + ' By: ' + collection[i].artist + ', published in: ' + collection[i].yearPublished );
+    //console.log(albumAsAString);
   } //end looping through collection array adding objects as strings
+  return true;
 } // end showCollection
 
 //Test the showCollection function.
-showCollection(myCollection);
+console.log('Testing showCollection: ', showCollection(myCollection));
 
 
 
@@ -96,30 +143,33 @@ console.log(findByArtist(myCollection, 'Shrek'));
     //return all albums from the collection being searched.
 
 function search (collection, searchCriteria) {
+  console.log('in search function. The current parameters are: ', collection, searchCriteria);
   let newCollection = [];
   if (isEmpty(searchCriteria) || typeof searchCriteria != 'object' || missingInfo(searchCriteria)) {
     return collection;
-  }
+  } // end conditional looking for an empty object, no object, missing data
   else {
     for(i=0; i<collection.length; i++) {
       if (collection[i].artist === searchCriteria.artist && collection[i].yearPublished === searchCriteria.yearPublished) {
         newCollection.push(collection[i]);
-      }
-    }    
+      } // end conditional checking to see if current property matches search property
+    }  // end loop through collection  
     return newCollection;
-  }
-}
+  } // end else
+} // end search
 
-function isEmpty (array) {
-  return array && Object.keys(array).length === 0;
-}
+function isEmpty (obj) {
+  console.log('in isEmpty function. The current parameter is: ', obj);
+  return obj && Object.keys(obj).length === 0;
+} // end isEmpty
 
 function missingInfo (object) {
+  console.log('in missingInfo function. the current parameter is: ', object);
   if (object.artist === undefined || object.yearPublished === undefined || object.artist === '' || object.yearPublished === '') {
     return true;
-  }
+  } // end conditional searching for missing data
   return false;
-}
+} // end missingInfo
 
 console.log('Tests for search function:')
 //return empty array
@@ -128,7 +178,7 @@ let searchObject1 = {
   yearPublished: 1957
 };
 console.log (search(myCollection, searchObject1));
-//return one match in array
+//return matches in array
 let searchObject2 = {
   artist: 'Shrek',
   yearPublished: 2001
